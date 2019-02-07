@@ -2,7 +2,9 @@ import React from 'react';
 import Counter from './Counter';
 class Counters  extends React.Component{
     render() {
-        const  {onDeleteEvent, onClickReset, counters,  handleIncrement} = this.props;
+        console.log('Counters rendered');
+        
+        const  {onDeleteEvent, onClickReset, counters, handleDecrement,  handleIncrement} = this.props;
         return (
             <div>            
                 {counters.map((counter)=> (
@@ -13,6 +15,7 @@ class Counters  extends React.Component{
                                         // id={counter.id}
                                         counter={counter}
                                         onIncrement={handleIncrement}
+                                        onDecrement={handleDecrement}
                                         onReset={onClickReset}></Counter>
                                 
                 ))} 

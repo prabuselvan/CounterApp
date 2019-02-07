@@ -8,7 +8,7 @@ class App extends Component {
 
   state = {
     counters : [
-        {id:1 ,value : 10},
+        {id:1 ,value : 0},
         {id:2 ,value : 11},
         {id:3 ,value : 12},
         {id:4 ,value : 13},
@@ -17,6 +17,31 @@ class App extends Component {
     ]
 }
 
+constructor(props) {
+  super(props)
+  console.log("App Constructor ", this.props);
+}
+
+
+componentDidMount() {
+  console.log('component DidMount');
+  
+}
+// lifecycle hooks
+
+//  Mounting Component
+// constructor
+// render 
+// componentDidMount  --> to get the data from the server once component is rendered
+
+// Update component
+// render 
+// componentDidUpdate
+
+
+// UnMount
+// componentWillUnMount (Wheneve removing the component)
+ 
 onDeleteEvent=(productId)=> {
     console.log('this is onDeleteEvent', productId);
    const counters =  this.state.counters.filter( c => c.id!== productId);
@@ -50,7 +75,17 @@ handleIncrement=(counter)=> {
     console.log(this.state.counters[index]);
     this.setState({counters});
 }
+
+handleDecrement=(counter)=> {
+  const counters = [...this.state.counters];
+  // find the index
+  const index = counters.indexOf(counter);
+  counters[index].value--;
+  this.setState({counters})
+}
   render() {
+
+    console.log('Rendered method represents the virtual DOM');
     return (
       <React.Fragment>
           <NavBar totalCounters={this.state.counters.filter(c=> c.value > 0 ).length}/>
@@ -62,6 +97,7 @@ handleIncrement=(counter)=> {
                     // id={counter.id}
                 
                     handleIncrement={this.handleIncrement}
+                    handleDecrement={this.handleDecrement}
                     onClickReset={this.onClickReset}/>
                     {/* Counters component is the controlled component */}
           </main>
